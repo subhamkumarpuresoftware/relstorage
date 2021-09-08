@@ -524,7 +524,8 @@ jobs:
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
           yum install sudo -y && \
-          sudo yum install -y ccache libmemcached-dev && \
+          wget http://mirror.centos.org/altarch/7/os/aarch64/Packages/libmemcached-devel-1.0.16-5.el7.aarch64.rpm && \
+          rpm -i libmemcached-devel-1.0.16-5.el7.aarch64.rpm && \
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
