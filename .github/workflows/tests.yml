@@ -499,6 +499,38 @@ jobs:
           skip_existing: true
           packages_dir: wheelhouse/
 
+  build-relstorage-aarch64:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [cp36-cp36m, cp37-cp37m, cp38-cp38, cp39-cp39]
+        os: [ubuntu-18.04]
+        include:
+          - os: ubuntu-20.04
+            python-version: 3.8
+    env:
+      py: /opt/python/${{ matrix.python-version }}/bin/python
+      img: quay.io/pypa/manylinux2014_aarch64
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1 
+      - name: Install Build Dependencies
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          ${{ env.img }} \
+          bash -exc '${{ env.py }} -m venv .env && \
+          source .env/bin/activate && \
+          pip install -U pip && \
+          pip install -U -q setuptools wheel twine && \
+          pip install -q -U 'cython>=3.0a6' && \
+          pip install 'greenlet>=1.0a1;platform_python_implementation=="CPython"' && \
+          deactivate'
+  
+
 # TODO:
 # * Use YAML syntax to share snippets, like the old .travis.yml did
 # Sadly, as of 2021-02-01, Github Actions does not support anchors at
