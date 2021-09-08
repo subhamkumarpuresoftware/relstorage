@@ -523,9 +523,10 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
-          yum install sudo -y && \
-          sudo ./.github/actions/config-cc/action.yml && \
-          sudo ./.github/actions/install-native-libs/action.yml && \
+          chmod 777 ./.github/actions/config-cc/action.yml && \
+          ./.github/actions/config-cc/action.yml && \
+          chmod 777 ./.github/actions/install-native-libs/action.yml && \
+          ./.github/actions/install-native-libs/action.yml && \
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
