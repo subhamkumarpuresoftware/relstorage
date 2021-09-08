@@ -506,9 +506,7 @@ jobs:
       matrix:
         python-version: ['cp36-cp36m', 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
         os: [ubuntu-18.04]
-        include:
-          - os: ubuntu-20.04
-            python-version: 3.8
+
     env:
       py: /opt/python/${{ matrix.python-version }}/bin/python
       img: quay.io/pypa/manylinux2014_aarch64
