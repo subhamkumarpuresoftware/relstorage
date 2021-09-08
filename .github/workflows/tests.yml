@@ -525,9 +525,7 @@ jobs:
           source .env/bin/activate && \
           yum install sudo -y && \
           yum install wget -y && \
-          wget http://mirror.centos.org/altarch/7/os/aarch64/Packages/libmemcached-devel-1.0.16-5.el7.aarch64.rpm && \
           yum install libmemcached-devel -y && \
-          rpm -i libmemcached-devel-1.0.16-5.el7.aarch64.rpm && \
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
