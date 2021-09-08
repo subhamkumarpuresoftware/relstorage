@@ -523,6 +523,8 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
+          ./.github/actions/config-cc && \
+          ./.github/actions/install-native-libs && \
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
