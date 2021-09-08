@@ -526,8 +526,8 @@ jobs:
           yum install sudo -y && \
           yum install wget -y && \
           yum install libmemcached-devel -y && \
-          export $GITHUB_ENV="CFLAGS=$CFLAGS -std=gnu++11" && \
-          echo "CXXFLAGS=$CXXCFLAGS -std=gnu++11" >> ${GITHUB_ENV} && \
+          export CFLAGS=$CFLAGS -std=gnu++11 && \
+          export CXXFLAGS=$CXXCFLAGS -std=gnu++11 && \
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
