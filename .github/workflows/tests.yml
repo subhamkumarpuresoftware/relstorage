@@ -526,6 +526,7 @@ jobs:
           yum install sudo -y && \
           yum install libmemcached-devel -y && \
           export CFLAGS=-pipe -Ofast -std=gnu++11 && \
+          
           pip install -U pip && \
           pip install -U -q setuptools wheel twine && \
           pip install -q -U 'cython>=3.0a6' && \
