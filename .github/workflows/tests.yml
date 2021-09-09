@@ -583,7 +583,7 @@ jobs:
           # pip install git+https://github.com/PyMySQL/mysqlclient-python.git && \
           export MYSQLCLIENT_CFLAGS=`pkg-config mysqlclient --cflags` && \
           export MYSQLCLIENT_LDFLAGS=`pkg-config mysqlclient --libs` && \
-          pip install mysqlclient && \
+          # pip install mysqlclient && \
           
           # yum -y install gcc && \
           # yum install python-devel -y && \
