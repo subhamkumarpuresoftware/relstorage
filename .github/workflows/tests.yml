@@ -573,6 +573,8 @@ jobs:
           echo "Install native libs" && \
           yum install libmemcached-devel -y && \
           echo "Build mysqlclient" && \
+          pip install --upgrade pip && \
+          yum install python3-devel mysql-devel -y && \
           pip install --no-binary :all: mysqlclient && \
           echo "Install RelStorage" && \
           pip install -U coverage && \
