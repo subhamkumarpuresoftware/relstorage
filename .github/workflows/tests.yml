@@ -574,11 +574,16 @@ jobs:
           yum install libmemcached-devel -y && \
           echo "Build mysqlclient" && \
           pip install --upgrade pip && \
-          yum -y install gcc -y && \
-          yum install python34-devel -y && \
-          yum install python-devel -y && \
-          yum install python3-devel mysql-devel -y && \
-          pip install --no-binary :all: mysqlclient && \
+          
+          yum -y install gcc gcc-c++ kernel-devel && \
+          yum -y install python3-devel libxslt-devel libffi-devel openssl-devel && \
+          pip install mysqlclient && \
+          
+          # yum -y install gcc && \
+          # yum install python-devel -y && \
+          # yum install python3-devel mysql-devel -y && \
+          # pip install --no-binary :all: mysqlclient && \
+          
           echo "Install RelStorage" && \
           pip install -U coverage && \
           pip install -U 'faulthandler; python_version == "2.7" and platform_python_implementation == "CPython"' && \
