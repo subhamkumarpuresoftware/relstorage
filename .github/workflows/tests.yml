@@ -574,6 +574,7 @@ jobs:
           yum install libmemcached-devel -y && \
           echo "Build mysqlclient" && \
           pip install --upgrade pip && \
+          yum install python-devel -y && \
           yum install python3-devel mysql-devel -y && \
           pip install mysqlclient && \
           echo "Install RelStorage" && \
