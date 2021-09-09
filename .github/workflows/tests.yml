@@ -580,7 +580,7 @@ jobs:
           yum -y install python3-devel libxslt-devel libffi-devel openssl-devel && \
           yum -y install MySQL-python && \
           yum install mysql -y && \
-          pip install git+https://github.com/PyMySQL/mysqlclient-python.git && \
+          # pip install git+https://github.com/PyMySQL/mysqlclient-python.git && \
           export MYSQLCLIENT_CFLAGS=`pkg-config mysqlclient --cflags` && \
           export MYSQLCLIENT_LDFLAGS=`pkg-config mysqlclient --libs` && \
           pip install mysqlclient && \
