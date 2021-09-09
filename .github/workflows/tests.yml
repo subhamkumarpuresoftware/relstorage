@@ -576,7 +576,9 @@ jobs:
           pip install --upgrade pip && \
           
           yum -y install gcc gcc-c++ kernel-devel && \
+          yum -y install mysql-devel python-devel python-setuptools && \
           yum -y install python3-devel libxslt-devel libffi-devel openssl-devel && \
+          yum -y install MySQL-python && \
           pip install mysqlclient && \
           
           # yum -y install gcc && \
