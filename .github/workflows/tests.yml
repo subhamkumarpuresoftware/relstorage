@@ -517,7 +517,7 @@ jobs:
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1 
-      - name: Install Build Dependencies
+      - name: Installing and Building
         run: |
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
@@ -542,7 +542,45 @@ jobs:
           ls -l dist && \
           twine check dist/* && \
           deactivate'
-  
+          
+          
+  test_aarch64:
+    needs: build-relstorage
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ['cp36-cp36m', 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
+        os: [ubuntu-18.04]
+    env:
+      py: /opt/python/${{ matrix.python-version }}/bin/python
+      img: quay.io/pypa/manylinux2014_aarch64
+      
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1 
+      - name: Installing and Building
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          ${{ env.img }} \
+          bash -exc '${{ env.py }} -m venv .env && \
+          source .env/bin/activate && \
+          echo "Install ccache, configure CFLAGS (ubuntu)" && \
+          export CFLAGS="-pipe -Ofast -std=gnu++11" && \
+          export CXXFLAGS="-pipe -Ofast -std=gnu++11" && \
+          echo "Install native libs" && \
+          yum install libmemcached-devel -y && \
+          echo "Build mysqlclient" && \
+          pip install --no-binary :all: mysqlclient && \
+          echo "Install RelStorage" && \
+          pip install -U coverage && \
+          pip install -U 'faulthandler; python_version == "2.7" and platform_python_implementation == "CPython"' && \
+          pip install -U  "`ls dist/RelStorage-*.whl`[test,all_tested_drivers]" && \
+          unzip -n dist/RelStorage-*whl -d src && \
+          deactivate'
+      
 
 # TODO:
 # * Use YAML syntax to share snippets, like the old .travis.yml did
