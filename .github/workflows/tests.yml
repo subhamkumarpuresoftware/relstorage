@@ -523,7 +523,6 @@ jobs:
           ${{ env.img }} \
           bash -exc '${{ env.py }} -m venv .env && \
           source .env/bin/activate && \
-          yum install sudo -y && \
           echo "Install ccache, configure CFLAGS (ubuntu)" && \
           export CFLAGS="-pipe -Ofast -std=gnu++11" && \
           export CXXFLAGS="-pipe -Ofast -std=gnu++11" && \
@@ -550,7 +549,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['cp36-cp36m', 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
-        os: [ubuntu-20.04]
+        os: [ubuntu-18.04, ubuntu-20.04]
     env:
       py: /opt/python/${{ matrix.python-version }}/bin/python
       img: quay.io/pypa/manylinux2014_aarch64
