@@ -575,6 +575,11 @@ jobs:
           echo "Build mysqlclient" && \
           pip install --upgrade pip && \
           yum -y install gcc && \
+          yum -y install mysql-devel python-devel python-setuptools && \
+          yum -y install python3-devel libxslt-devel libffi-devel openssl-devel && \
+          yum -y install MySQL-python && \
+          yum install mysql -y && \
+          pip install mysqlclient && \
           deactivate'
       
 
