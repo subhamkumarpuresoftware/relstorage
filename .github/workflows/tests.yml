@@ -550,7 +550,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['cp36-cp36m', 'cp37-cp37m', 'cp38-cp38', 'cp39-cp39']
-        os: [ubuntu-18.04]
+        os: [ubuntu-18.04, ubuntu-20.04]
     env:
       py: /opt/python/${{ matrix.python-version }}/bin/python
       img: quay.io/pypa/manylinux2014_aarch64
@@ -575,15 +575,16 @@ jobs:
           echo "Build mysqlclient" && \
           pip install --upgrade pip && \
           
-          yum -y install gcc gcc-c++ kernel-devel && \
+          yum -y install gcc && \
+          # yum install gcc-c++ kernel-devel && \
           yum -y install mysql-devel python-devel python-setuptools && \
           yum -y install python3-devel libxslt-devel libffi-devel openssl-devel && \
           yum -y install MySQL-python && \
           yum install mysql -y && \
           # pip install git+https://github.com/PyMySQL/mysqlclient-python.git && \
-          export MYSQLCLIENT_CFLAGS=`pkg-config mysqlclient --cflags` && \
-          export MYSQLCLIENT_LDFLAGS=`pkg-config mysqlclient --libs` && \
-          # pip install mysqlclient && \
+          # export MYSQLCLIENT_CFLAGS=`pkg-config mysqlclient --cflags` && \
+          # export MYSQLCLIENT_LDFLAGS=`pkg-config mysqlclient --libs` && \
+          pip install mysqlclient && \
           
           # yum -y install gcc && \
           # yum install python-devel -y && \
