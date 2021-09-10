@@ -582,8 +582,6 @@ jobs:
           pip install mysqlclient && \
           echo "Install RelStorage" && \
           pip install -U coverage && \
-          pip install -U  "`ls dist/RelStorage-*.whl`[test,all_tested_drivers]" && \
-          unzip -n dist/RelStorage-*whl -d src && \
           deactivate'
       
 
